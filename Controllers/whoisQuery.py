@@ -22,6 +22,12 @@ class IndexHandler(tornado.web.RequestHandler):
       domain_data = analysisHtml.analysisA(query_domain)
       domain_name = domain_data.get('域名')
       page_data_string = pageQuery.pageQuery(domain_name)
+      if page_data_string == None or page_data_string == '':
+        page_data_string = """
+        此域名暂时只能返回这这内容
+        """
+        for i in domain_data:
+          page_data_string += "{}:{}\n".format(i,domain_data.get(i))
     self.render('index.html', domain_data=page_data_string)
   def post(self, *args, **kwargs):
     query_domain = self.get_argument('domain')
@@ -30,4 +36,10 @@ class IndexHandler(tornado.web.RequestHandler):
       domain_data = analysisHtml.analysisA(query_domain)
       domain_name = domain_data.get('域名')
       page_data_string = pageQuery.pageQuery(domain_name)
+      if page_data_string == None or page_data_string == '':
+        page_data_string = """
+        此域名暂时只能返回这这内容
+        """
+        for i in domain_data:
+          page_data_string += "{}:{}\n".format(i, domain_data.get(i))
     self.render('index.html', domain_data = page_data_string)
