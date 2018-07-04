@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>域名Whois查询接口-支持API查询</title>
+    <style>
+        #domain {
+            margin: 10px 0 0 10px;
+        }
+    </style>
 </head>
 <body>
 <form action="/">
-    <input type="text" name="domain" placeholder="example"/>
+    <input type="text" id="domain" name="domain" placeholder="example"/>
     <input type="submit" value="查询">
 </form>
 <pre>{{ domain_data }}</pre>

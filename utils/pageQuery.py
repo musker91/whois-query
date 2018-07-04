@@ -9,6 +9,8 @@ def pageQuery(domain):
   :param domain: 查询的域名
   :return: 返回whois查询后的内容
   """
+  if domain == None:
+    return '你输入的是个啥玩意,别胡闹!!!'
   url = 'http://whois.stupig.com/?domain=' + str(domain)
   try:
     requestsObj = requests.get(url=url)
@@ -17,4 +19,4 @@ def pageQuery(domain):
     soupHtml = BeautifulSoup(requestsObj.text, 'html.parser')
     return soupHtml.pre.string
   except (HTTPError):
-    return ''
+    return '不好意思,稍等一会,服务器去撩妹了!!!'

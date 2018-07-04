@@ -35,6 +35,6 @@ def analysisA(domain):
               val = div.string
         data_json[key] = val
     data_json['code'] = 1
-  except (HTTPError):
-    data_json = {'code': -1}
+  except (HTTPError, IndexError):
+    data_json = {'code': -1, 'msg': '你输入的是个啥玩意,别胡闹!!!'}
   return data_json
