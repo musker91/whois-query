@@ -7,3 +7,6 @@
 
 - 支持Dockerfile部署whois查询服务端
 
+#### 测试接口
+- page: `http://aly.tt80.xin:8080/`
+- api: `http://aly.tt80.xin:8080/whoisapi?domain=`
