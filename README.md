@@ -5,8 +5,6 @@
 
 - 网关查询接口(支持POST,GET方式)
 
-- 支持Dockerfile部署whois查询服务端
-
 #### 测试接口
 - page: `http://aly.tt80.xin:8080/`
 - api: `http://aly.tt80.xin:8080/whoisapi?domain=`
