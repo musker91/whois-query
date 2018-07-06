@@ -2,3 +2,4 @@
 1. `http://whois.chaicp.com/home_whois/cha?ym=baidu.com`
     - page: `http://url/?domain=baidu.com`
     - api: `http://url/whoisapi?domain=baidu.com`
+2. `http://da.ai/baidu.com`

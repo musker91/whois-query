@@ -6,6 +6,8 @@ def cnToEN(data):
   :param data: 源数据
   :return: dict
   """
+  if data.get('code') == -1:
+    return data
   new_dict = {}
   new_dict['domain'] = data.get('域名')
   new_dict['registrar'] = data.get('注册商')
