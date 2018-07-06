@@ -11,7 +11,7 @@ def pageQuery(domain):
   """
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36 Edge/15.15063'}
   if domain == None:
-    return '你输入的是个啥玩意,别胡闹!!!'
+    return '你输入的是个啥玩意,别胡闹兄嘚!!!'
   url = 'http://da.ai/' + str(domain)
   try:
     requestsObj = requests.get(url=url, headers=headers)
