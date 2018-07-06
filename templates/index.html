@@ -1,59 +1,71 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<link rel="shortcut icon" href="favicon.ico">
-<title>域名Whois查询接口-支持API查询</title>
-<style>
-body {
-	font-family: 'Trebuchet MS','Lucida Grande',Verdana,Arial,Sans-Serif;
-	font-size: 12px;
-}
-h1 {
-	font-family: 'Trebuchet MS','Lucida Grande',Verdana,Arial,Sans-Serif;
-	font-size: 1.5em;
-	margin: .5em 0;
-}
-pre {
-	font-family: monospace;
-	border-bottom: 1px dotted #999;
-    width: 100%;
-    overflow-x: auto;
-}
-.copyright {
-	font-size: 11px;
-	margin: .5em 0 1em;
-	font-family: 'Trebuchet MS', MingLiu;
-}
-.copyright a {
-	color: #093;
-	text-decoration: none;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>域名Whois查询接口-支持API查询</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+            font-size: 12px;
+        }
+
+        h1 {
+            font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+            font-size: 1.5em;
+            margin: .5em 0;
+        }
+
+        pre {
+            font-family: monospace;
+            border-bottom: 1px dotted #999;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .copyright {
+            font-size: 11px;
+            margin: .5em 0 1em;
+            font-family: 'Trebuchet MS', MingLiu;
+        }
+
+        .copyright a {
+            color: #093;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 <body>
 
 <form method="get" action="/" onsubmit="window.location='/'+encodeURI(this.d.value);return false;">
-	<input name="d" size="22" placeholder="domain name" />
-	<button type="submit">whois</button>
+    <input name="domain" size="22" placeholder="domain name"/>
+    <button type="submit">whois</button>
 </form>
 
 <h1><a href="http://{{ domain }}/">{{ domain }}</a></h1>
 <pre>{{ domain_data }}</pre>
 
 <div class="copyright">
-	Powered by <a href="http://aly.tt80.xin:8080/">tt80.xin whois</a> (3,930,157 queries)<br>
+    Powered by <a href="http://aly.tt80.xin:8080/">tt80.xin whois</a> (3,930,157 queries)<br>
 </div>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-91623335-1', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-91623335-1', 'auto');
+    ga('send', 'pageview');
 
 </script>
 
