@@ -7,7 +7,7 @@
 
 #### 测试接口
 - page: [http://whois.tt80.xin](http://whois.tt80.xin/?domain=tt80.xin)
-- api: [http://whois.tt80.xin/whoisapi?](http://whois.tt80.xin/whoisapi?domain=tt80.xin)
+- api: [http://whois.tt80.xin/whoisapi?domain=](http://whois.tt80.xin/whoisapi?domain=tt80.xin)
  - 返回状态： 
      1) code: -1 没有查询到指定域名
      2) code: 1  返回指定域名信息
