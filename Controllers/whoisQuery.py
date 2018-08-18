@@ -1,30 +1,39 @@
 # -*- coding: utf-8 -*-
 import tornado.web
-from utils import pageQuery,cnToEn,whileSelect
+from utils.whois_data import WhoisData
+from tornado.options import options, define
+
+define('cache', default=3, help='domain info cache day', type=int)
+tornado.options.parse_command_line()
+whois_query = WhoisData(options.cache)
+
 
 class WhoisApiHandler(tornado.web.RequestHandler):
   def get(self):
-    query_domain = self.get_argument('domain')
-    if query_domain != None or query_domain != '':
-      domain_data = cnToEn.cnToEN(whileSelect.whileSelect(query_domain))
-    self.write(domain_data)
+    domain_data = {'code': -1}
+    query_domain = self.get_argument('domain', None)
+    if query_domain:
+      domain_data = whois_query.query(query_domain, 'api')
+    return self.write(domain_data)
+
   def post(self, *args, **kwargs):
     self.get()
 
+
 class IndexHandler(tornado.web.RequestHandler):
   def get(self):
-    query_domain = self.get_argument('domain',default=None)
+    query_domain = self.get_argument('domain', None)
     page_data_string, domain_name = '', ''
-    if query_domain != None and query_domain != '':
-      domain_data = cnToEn.cnToEN(whileSelect.whileSelect(query_domain))
-      domain_name = domain_data.get('domain')
-      page_data_string = pageQuery.pageQuery(domain_name)
-      if page_data_string == None or page_data_string == '':
-        page_data_string = """
-        此域名暂时只能返回这这内容
-        """
-        for i in domain_data:
-          page_data_string += "{}:{}\n".format(i,domain_data.get(i))
+    if query_domain:
+      domain_name, page_data_string = whois_query.query(query_domain, 'page')
     self.render('index.html', domain_data=page_data_string, domain=domain_name)
+
+  def post(self, *args, **kwargs):
+    self.get()
+
+class PageError(tornado.web.RequestHandler):
+  def get(self, *args, **kwargs):
+    return self.redirect('/')
+
   def post(self, *args, **kwargs):
     self.get()

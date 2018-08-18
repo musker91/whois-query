@@ -20,7 +20,8 @@ class RouteSettings(object):
     """
     web_demo = [
       (r'/', whoisQuery.IndexHandler),
-      (r'/whoisapi', whoisQuery.WhoisApiHandler),
+      (r'/whoisapi/?', whoisQuery.WhoisApiHandler),
+      (r".*", whoisQuery.PageError)
     ]
     return web_demo
 
