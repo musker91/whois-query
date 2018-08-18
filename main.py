@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 import logging
 import tornado.ioloop
-from tornado.options import define, options
+from config import *
 from tornado.httpserver import HTTPServer
 from app_route import RouteSettings
-
-define('port', default=8080, help='server default port', type=int)
 
 if __name__ == '__main__':
   app = RouteSettings().tornadoRoute()

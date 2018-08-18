@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import tornado.web
 from utils.whois_data import WhoisData
-from tornado.options import options, define
+from config import *
 
-define('cache', default=3, help='domain info cache day', type=int)
-tornado.options.parse_command_line()
 whois_query = WhoisData(options.cache)
 
 
@@ -30,6 +28,7 @@ class IndexHandler(tornado.web.RequestHandler):
 
   def post(self, *args, **kwargs):
     self.get()
+
 
 class PageError(tornado.web.RequestHandler):
   def get(self, *args, **kwargs):
