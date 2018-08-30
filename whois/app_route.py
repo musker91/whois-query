@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import tornado.web
-from Controllers import whoisQuery
+from whois.Controllers import whoisQuery
 import os
 
 class RouteSettings(object):

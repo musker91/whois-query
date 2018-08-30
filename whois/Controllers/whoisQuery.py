@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import tornado.web
-from utils.whois_data import WhoisData
-from config import *
+from whois.utils.whois_data import WhoisData
+from whois.config import *
 
 whois_query = WhoisData(options.cache)
 
