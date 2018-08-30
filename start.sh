@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-nohup python main.py --logging=info >> log/whois.log &
+nohup python3 main.py --logging=info >> /dev/null &
 if [[ $? != 0 ]]; then
-  nohup python3 main.py --logging=info >> log/whois.log &
+  nohup python main.py --logging=info >> /dev/null &
 fi
