@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-nohup python3 main.py --logging=info >> /dev/null &
+python3 main.py >> /dev/null &
 if [[ $? != 0 ]]; then
-  nohup python main.py --logging=info >> /dev/null &
+  python main.py >> /dev/null &
 fi
