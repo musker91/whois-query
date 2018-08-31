@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-_NOW_PATH=`pwd`
-python3 ${_NOW_PATH}/main.py --logging=none
+WHOIS_DIR=/opt/whois-query/main.py
+python3 ${WHOIS_DIR} --logging=none
 if [[ $? != 0 ]]; then
-  python ${_NOW_PATH}/main.py --logging=none
+  python ${WHOIS_DIR} --logging=none
 fi
