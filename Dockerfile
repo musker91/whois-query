@@ -14,4 +14,4 @@ RUN git clone $WHOIS_CONTAINER && \
 
 EXPOSE 8080
 
-CMD ["/opt/start.sh"]
+CMD ["/opt/whois-query/start.sh"]
