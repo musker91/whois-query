@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-python3 main.py >> /dev/null &
+_NOW_PATH=`pwd`
+python3 ${_NOW_PATH}/main.py --logging=none  &> /dev/null &
 if [[ $? != 0 ]]; then
-  python main.py >> /dev/null &
+  python ${_NOW_PATH}/main.py --logging=none &> /dev/null &
 fi
