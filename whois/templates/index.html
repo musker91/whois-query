@@ -5,28 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>域名Whois查询接口-支持API查询</title>
     <meta http-equiv="keywords" content="whois,whois查询,whois api">
-    <meta name="description" content="免费域名Whois查询接口-支持API查询" />
+    <meta name="description" content="免费域名Whois查询接口-支持API查询"/>
     <style>
         body {
-            font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
             font-size: 12px;
         }
 
-        h1 {
-            font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
-            font-size: 1.5em;
-            margin: .5em 0;
-        }
-
-        pre {
-            font-family: monospace;
-            border-bottom: 1px dotted #999;
-            width: 100%;
-            overflow-x: auto;
+        li {
+            list-style-type:none;
         }
 
         .copyright {
-            font-size: 11px;
             margin: .5em 0 1em;
             font-family: 'Trebuchet MS', MingLiu;
         }
@@ -35,20 +24,92 @@
             color: #093;
             text-decoration: none;
         }
+
+        . inputText {
+            border-radius: 2%;
+            border: 5px;
+            border-color: black;
+        }
     </style>
 </head>
 <body>
-<form method="get" action="/" onsubmit="window.location='/'+encodeURI(this.d.value);return false;">
-    <input name="domain" size="22" placeholder="domain name"/>
-    <button type="submit">whois</button>
+<form>
+    <input name="domain_name" size="24" placeholder="domain name"/>
+    <button type="button" id="submit">query</button>
 </form>
-<h1><a target="_blank" href="http://{{ domain }}/">{{ domain }}</a></h1>
-<pre>{{ domain_data }}</pre>
+
+<div style="margin: .5em 0 1em;">
+    <span>查询状态: <span style="color: red;" id="selectStatus">*****</span></span>
+</div>
+
+<pre id="info_block">
+</pre>
 
 <div class="copyright">
     免责声明：本网站内容收集于互联网，开发者不承担任何由于内容的合法性及健康性所引起的争议和法律责任。<br>
-    Powered by <a href="http://whois.tt80.xin/">tt80.xin whois</a>
-
+    Powered by <a href="http://www.tt80.xin/">tt80.xin whois</a>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<script>
+    function data_option(data) {
+        if (data.code == "1") {
+            // 域名获取成功
+            $("#selectStatus").html("域名whois信息获取成功");
+            $("#info_block").append("<hr style='border:1 dashed #987cb9' size=1>");
+            $("#info_block").append(data.data);
+            $("#info_block").append("<hr style='border:1 dashed #987cb9' size=1>");
+        } else if (data.code == "0") {
+            // 域名不存在
+            $("#selectStatus").html("查询域名不存在");
+            $("#info_block").html("<h3 style='color: red;'>" + "查询域名不存在" + "</h3>");
+        } else if (data.code == "-1") {
+            // 暂不支持此域名查询
+            $("#selectStatus").html("暂不支持此域名后缀查询");
+            $("#info_block").html("<h3 style='color: red;'>" + "暂不支持此域名后缀查询" + "</h3>");
+
+        } else if (data.code == "-2") {
+            // 域名输入有误
+            $("#selectStatus").html("域名输入有误");
+            $("#info_block").html("<h3 style='color: red;'>" + "域名输入有误" + "</h3>");
+        } else if (data.code == "-3") {
+            // 域名查询失败
+            $("#selectStatus").html("域名查询失败，请稍后重试");
+            $("#info_block").html("<h3 style='color: red;'>" + "域名查询失败，请稍后重试" + "</h3>");
+        } else if (data.code == "-4") {
+            // 服务器异常
+            $("#selectStatus").html("服务器异常，请稍后重试");
+            $("#info_block").html("<h3 style='color: red;'>" + "服务器异常，请稍后重试" + "</h3>");
+        } else {
+            $("#selectStatus").html("请求发送失败，请稍后重试");
+            $("#info_block").html("<h3 style='color: red;'>" + "请求发送失败，请稍后重试" + "</h3>");
+        }
+    };
+    $("#submit").click(function () {
+        $("#info_block").html("");
+        var data = {}
+        $.each($('form').serializeArray(), function () {
+            data[this.name] = this.value;
+        });
+        $("#selectStatus").html("正在获取域名信息...");
+        $.ajax({
+            type: "POST",
+            url: "/query",
+            dataType: "json",
+            data: {"domain_name": data["domain_name"]},
+            success: function (data) {
+                data_option(data);
+            },
+            error: function (data) {
+                console.log("Error", data);
+                $("#selectStatus").html("请求发送失败，请稍后重试");
+                $("#info_block").html("<h3 style='color: red;'>" + "请求发送失败，请稍后重试" + "</h3>");
+            }
+        });
+    });
+</script>
 </body>
 </html>

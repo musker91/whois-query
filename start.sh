@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-WHOIS_DIR=`pwd`/whois-query/main.py
-python3 ${WHOIS_DIR} --logging=none
+ROOT_DIR="/opt"
+WHOIS_MAIN=${ROOT_DIR}/whois-query/main.py
+python3 ${WHOIS_MAIN}
 if [[ $? != 0 ]]; then
-  python ${WHOIS_DIR} --logging=none
+  python ${WHOIS_MAIN}
 fi

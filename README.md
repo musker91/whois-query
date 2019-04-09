@@ -1,31 +1,78 @@
-#### 项目介绍
-特点: 可以通过接口直接匹配域名合法性，同时可以匹配出传入域名字串的一级域名
-1. API接口,返回JSON格式数据(支持POST,GET方式)
-2. 网关查询接口(支持POST,GET方式)
-3. 使用内存缓存保存查询到的域名信息,加速查询速度,默认设置保存3天,可以在启动时指定`cache`参数来指定缓存的天数
+# Whois-query
 
+---
+
+### 项目介绍
+
+免费Whois查询接口，完全开放
+
+1. API接口,返回JSON格式数据(支持POST,GET方式)
+2. 网页查询接口(支持POST,GET方式)
 
 #### 测试接口
-1. page: [http://whois.tt80.xin](http://whois.tt80.xin/?domain=tt80.xin)
-2. api: [http://whois.tt80.xin/whoisapi?domain=](http://whois.tt80.xin/whoisapi?domain=tt80.xin)
-  ```
-  返回状态码:
-     1) code: -1 没有查询到指定域名
-     2) code: 1  返回指定域名信息
-  ```
-#### 运行服务端
-1. 直接运行main.py文件，python版本3.5+
-2. 使用supervisor做进程管理,启动多个服务端,使用nginx做代理
+
+1. 页面: [http://whois.tt80.xin](http://whois.tt80.xin)
+
+2. Api: [http://whois.tt80.xin/whoisapi?domain_name=](http://whois.tt80.xin/whoisapi?domain_name=tt80.xin)
+
+```json
+{
+    "code": "1",
+    "data": {
+        "DomainName": "TT80.XIN ",
+        "RegistryDomainID": "D417300000001380250-ACRS ",
+        "RegistrarWhoisServer": null,
+        "RegistrarUrl": "www.net.cn ",
+        "UpdatedDate": "2018-06-10T12:23:28Z ",
+        "CreationDate": "2017-06-09T04:28:11Z ",
+        "RegistryExpiryDate": "2019-06-09T04:28:11Z ",
+        "Registrar": "Alibaba Cloud Computing Ltd. d/b/a HiChina (www.net.cn) ",
+        "RegistrarIanaId": "1599 ",
+        "RegistrarAbuseContactEmail": null,
+        "RegistrarAbuseContactPhone": null,
+        "DomainStatus": [
+            "ok https://icann.org/epp#ok "
+        ],
+        "NameServer": [
+            "DNS23.HICHINA.COM ",
+            "DNS24.HICHINA.COM "
+        ]
+    }
+}
 ```
-1)安装依赖包
-  python3 -m pip install -r requirements.txt
-2) 运行服务端程序
+
+  ```txt
+  返回状态码:
+    1)  1  域名信息获取成功
+    2)  0  域名不存在
+    3) -1  暂不支持此域名查询
+    4) -2  域名输入有误
+    5) -3  域名查询失败
+    6) -4  服务器异常
+  ```
+
+#### 运行服务端
+
+**一、直接运行主程序文件启动服务**
+
+直接运行main.py文件，需要python 3.5+版本
+
+1、 安装依赖包
+
+  ```txt
+    python3 -m pip install -r requirements.txt
+  ```
+
+2、运行服务端程序
+
+  ```txt
     python3 main.py
     运行时可以指定的参数
-      1. `cache`: 指定域名缓存的天数
-      2. `port`: 指定程序运行的端口
-```
-3. 运行Docker容器
-```
-docker run -itd --name=whois-query -p 8080:8080 registry.cn-beijing.aliyuncs.com/musker/whois-query
+    `port`: 指定程序运行的端口
+  ```
+
+**二、使用Docker运行服务端**
+
+```txt
+docker run -d --name=whois-query -p 8080:8080 registry.cn-beijing.aliyuncs.com/musker/whois-query
 ```
